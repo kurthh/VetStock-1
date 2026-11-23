@@ -303,6 +303,7 @@ export default function AuthApp() {
 
 export function MainLayout() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
