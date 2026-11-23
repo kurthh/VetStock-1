@@ -303,9 +303,15 @@ export default function AuthApp() {
 
 export function MainLayout() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const handleMobileNavigation = (path) => {
+    navigate(path);
+    setMobileSidebarOpen(false);
+};
 
     const currentPath = location.pathname.toLowerCase();
 
@@ -423,13 +429,21 @@ export function MainLayout() {
         }
     };
 
-    return (
-        <div className="app">
+   return (
+    <div className="app">
 
-            <aside
-                className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''
-                    }`}
-            >
+        {mobileSidebarOpen && (
+            <div
+                className="mobile-sidebar-overlay"
+                onClick={() => setMobileSidebarOpen(false)}
+            />
+        )}
+
+        <aside
+    className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''} ${
+        mobileSidebarOpen ? 'mobile-open' : ''
+    }`}
+>
                 <div className="sidebar-header">
                     <div className="sidebar-logo-icon">
                         <img
